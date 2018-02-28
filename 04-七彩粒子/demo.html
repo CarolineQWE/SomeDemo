@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            cursor: move;
+        }
+        #cvs{
+            display: block;
+            background-color: #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="cvs"></canvas>
+</body>
+<script>
+    window.onload = function(){
+        /*
+            1. 设置画布宽高随浏览器宽高
+            2. 监听body,MouseMove事件,获取鼠标当前坐标,
+            3. 创建bubble对象,给bubble对象的原型添加方法
+            4. 获取鼠标坐标的时候,调用bubble原型上的方法,在当前位置绘制圆
+            5. 圆的半径随机,运动方向随机向四周扩散,颜色随机
+        */
+        
+        var cvs = document.getElementById("cvs");
+        var drawPen = cvs.getContext("2d");
+        var doc = document.body || document.documentElement;
+        var w = window.innerWidth;  //获取浏览器窗口宽
+        var h = window.innerHeight;  //获取浏览器窗口高
+        var color = ["#FF6E97","#5ED5D1","#1DB0D8","#82A6F5","#F6D6FF","#56A36C","#E9F01D"];  //随机颜色
+        var bubbleArr = [];  //存储bubble实例对象 
+        cvs.width = w;
+        cvs.height = h;
+        
+        window.onresize = function(){   //改变窗口大小,画布宽高自适应
+            w = window.innerWidth;
+            h = window.innerHeight;
+            cvs.width = w;
+            cvs.height = h;
+        }
+        
+        doc.addEventListener("mousemove",function(e){  //监听body,鼠标移动事件
+            e = event || window.event;
+            var mouseX = e.clientX;  //获取鼠标当前x坐标
+            var mouseY = e.clientY;  //获取鼠标当前y坐标
+            for(var i=1;i<3;i++){
+                createNewBubble(mouseX,mouseY);  // 鼠标每移动一次,创建三组对象
+            }
+            (bubbleArr.length>500) && (bubbleArr.shift());  // 数组长度大于500,则删除第一个
+        });
+
+        // function render(){   // 渲染函数,让气泡动起来
+        //     drawPen.clearRect(0,0,w,h);
+        //     for(var k of bubbleArr){
+        //         k.draw();
+        //         k.update();
+        //     }
+        //     requestAnimationFrame(render);
+        // }
+        // render();
+        (function render(){   // 渲染函数,让气泡动起来
+            setInterval( () => {
+                drawPen.clearRect(0,0,w,h);
+                for(var k of bubbleArr){
+                    k.update();
+                }
+            } ,1000/60);
+        })();
+
+
+        function createNewBubble(mouseX,mouseY){  // bubble实例工厂,每调用一次,生成一个bubble;
+            var bubble = new Bubble();
+            bubble.init(mouseX,mouseY);
+            bubble.draw();
+            bubbleArr.push(bubble);   //将实例化的bubble对象加入数组
+        }
+
+        function random (min ,max ){  // 产生随机数
+            return Math.random()*(max-min)+min;
+        }
+
+
+        function Bubble (){  
+            this.x = null;  // 气泡圆心x坐标
+            this.y = null;  // 气泡圆心y坐标
+            this.radius = null; // 气泡半径
+            this.color = null;  // 气泡颜色
+            this.deraction = null; // 气泡扩散角度
+        }
+        Bubble.prototype = {
+            init: function(mouseX,mouseY){
+                this.x = mouseX || 0;
+                this.y = mouseY || 0;
+                this.radius = random(30,50);
+                this.color = color[Math.floor(random(0,color.length))];
+                this.deraction = random(0,60);  // 气泡随机角度
+            },
+            draw: function(){
+                drawPen.beginPath();
+                drawPen.fillStyle = this.color;
+                drawPen.globalCompositeOperation = "lighter";  // 设置重叠图像如何显示
+                drawPen.arc(this.x,this.y,this.radius,0,Math.PI*2); // 画圆
+                drawPen.fill();
+            },
+            update: function(){
+                this.x += (Math.cos(Math.PI/180*this.deraction)*this.radius+random(0,2))*random(-0.2,0.2);
+                this.y += (Math.sin(Math.PI/180*this.deraction)*this.radius+random(0,2))*random(-0.2,0.2);
+                this.radius *= 0.96;
+                this.draw();
+            }
+        };
+    }
+</script>
+</html>

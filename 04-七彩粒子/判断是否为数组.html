@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    window.onload = function(){
+
+        //判断是否为数组
+        var arr = [];
+
+        //方法一: instance of
+        console.log(arr instanceof Array);
+
+        //方法二: 通用方法
+        function isArray(obj){
+            return Object.prototype.toString.call(obj)==="[object Array]";
+        }
+        console.log(isArray(arr));
+    }
+</script>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: #87ccee;
+        }
+        .box{
+            display: -webkit-flex;
+            display: flex;
+            align-items: center;
+            width: 400px;
+            height: 400px;
+            margin: 100px auto;
+            border-radius: 50%;
+            background-image: linear-gradient(to bottom,#000 50%,#fff 50%);
+        }
+        .box::before,.box::after{
+            display: block;
+            content: "";
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        .box:hover::before{
+            -webkit-transform: scale(1.2,1,2);
+            transform: scale(1.2,1.2);
+        }
+        .box::before{
+            -webkit-transition: all .3s linear;
+            transition: all .3s linear;
+            background-color: #000;
+            border: 80px solid #fff;
+        }
+        .box::after{
+            background-color: #fff;
+            border: 80px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+</body>
+</html>

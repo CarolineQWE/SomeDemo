@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        cursor: pointer;
+    }
+    #cvs{
+        display: block;
+        background-color: #000;
+    }
+    div{
+        position: absolute;
+        bottom: -45px;
+    }
+</style>
+<body>
+    <canvas id="cvs"></canvas>
+</body>
+<script>
+    window.onload = function(){
+
+
+        /*
+            1. 动态设置画布宽高
+            2.鼠标点击body,创建div,颜色随机,椭圆
+            3.div飞到点击位置,消失,生成多个bubble对象,
+            4.bubble 颜色随机,大小随机,运动轨迹弧形
+        */
+        
+
+        var cvs = document.getElementById("cvs");
+        var drawPen = cvs.getContext("2d");
+        var doc = document.body || document.documentElement;
+        var w = window.innerWidth;   // 浏览器窗口内宽
+        var h = window.innerHeight;  // 浏览器窗口内高
+        var bubbleColor = ["#FF6E97","#5ED5D1","#1DB0D8","#82A6F5","#F6D6FF","#56A36C","#E9F01D"];  // 椭圆随机颜色数组
+        var ovalColor = ["#cee94e","#ed3636","#db9019","#1a2d27","#56a36c","aqua","skyblue"];   // bubble随机颜色数组
+        var saveOvalArr = [];   // 存储椭圆对象
+        var saveBubbleArr = [];  // 存储bubble对象
+        var timer = 0;   // 定时器的数值类型是number 1; 所以初始值为0;
+        cvs.width = w;
+        cvs.height = h;
+        
+        window.onresize = () => {    //  改变窗口大小,动态改变画布大小
+            w = window.innerWidth;
+            h = window.innerHeight;
+            cvs.width = w;
+            cvs.height = h;
+        };
+
+
+        doc.addEventListener("click", (e) => {   // body点击事件
+            var mouseX = e.clientX;     // 鼠标点击点x坐标
+            var mouseY = e.clientY;     // 鼠标点击点y坐标
+            (saveOvalArr.length>=1) && (removeOval());  // 每一次点击判断,是否超过规定长度,多则删除body下面的第一个节点
+            createOval(mouseX,mouseY);
+            (saveBubbleArr.length >= 40) && (saveBubbleArr.splice(0,20));   //判断保存bubble数组长度是否大于指定值,删掉第一个
+        } );
+
+        function createOval (mouseX,mouseY){  //椭圆创建工厂
+            var oval = document.createElement("div");
+            changeOvalStyle(oval,mouseX,mouseY);   
+            doc.appendChild(oval);   // 将椭圆追加到body
+            saveOvalArr.push(oval);  // 将椭圆对象追加到数组中
+        }
+
+        function removeOval (){    // 删除椭圆
+            doc.removeChild(saveOvalArr.shift());
+        }
+
+        function changeOvalStyle (ele,mouseX,mouseY){   // 设置椭圆样式
+            ele.style.left = mouseX-5 + "px";
+            ele.style.top = h + "px";
+            ele.style.width = 10 + "px";
+            ele.style.height = 40 + "px";
+            ele.style.backgroundColor = ovalColor[Math.floor(random(0,ovalColor.length))];
+            ele.style.borderRadius = "55%";
+            clearInterval(timer);
+            timer = setInterval(function(){
+                var flag = false;
+                ele.style.top = ele.offsetTop - 10 + "px";
+                if(ele.offsetTop <= mouseY){
+                    ele.style.top = mouseY-20 + "px"; 
+                    ele.style.display = "none";
+                    clearInterval(timer);   // 清除定时器
+                    for(i=0;i<100;i++){
+                        createBubble(mouseX,mouseY);    // 实例化 80个气泡
+                    }
+                    timer = setInterval(function(){    
+                        drawPen.clearRect(0,0,w,h);
+                        for(var k of saveBubbleArr){
+                            k.update();
+                            k.draw();
+                        }
+                    },1000/60);
+                }
+                
+            },1000/60);
+            
+        }
+        
+        function createBubble (mouseX,mouseY){    //bubble实例工厂
+            var bubble = new Bubble();
+            bubble.init(mouseX,mouseY);
+            bubble.draw();
+            saveBubbleArr.push(bubble);  // 气泡数组保存每个实例化的bubble对象
+        }
+        
+
+        function random (min,max){   // 产生随机数
+            return Math.random()*(max-min)+min;
+        }
+
+        function Bubble (){   // 气泡构造函数
+            this.color = null;  // 气泡颜色
+            this.x = null;  // 气泡当前x坐标
+            this.y = null;  //气泡当前y坐标
+            this.radius = null;  // 气泡半径
+            this.angle = null;  //运动角度
+        }
+        Bubble.prototype = {
+            init: function(mouseX,mouseY){
+                this.color = bubbleColor[Math.floor(random(0,bubbleColor.length))];
+                this.radius = random(10,20);
+                this.x = mouseX;
+                this.y = mouseY;
+                this.angle = random(0,360);
+            },
+            draw: function(){
+                drawPen.beginPath();
+                drawPen.fillStyle = this.color;
+                drawPen.arc(this.x,this.y,this.radius,0,Math.PI*2);
+                drawPen.fill();
+            },
+            update: function(){
+                this.x += (Math.cos(Math.PI/180*this.angle)*this.radius*+random(0,2)*random(0,1));
+                this.y += (Math.sin(Math.PI/180*this.angle)*this.radius*+random(0,2)*random(0,1));
+                this.radius *= .96;
+            }
+        };
+
+    }
+</script>
+</html>
