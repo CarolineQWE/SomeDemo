@@ -1,0 +1,194 @@
+@charset "utf-8";
+// ---- command style ---
+html, body {
+    height: 100%;
+}
+body {
+    overflow: hidden;
+    text-align: center;
+}
+// --- 手机 + 密码通用样式 start---
+.samebox {
+    overflow: hidden;
+    position: relative;
+    height: 50px;
+    margin-top: 15px;
+    border: 1px solid #999;
+    border-radius: 10px;
+    line-height: 50px;
+    font-size: .9rem;
+    .inpbox {
+        input {
+            -webkit-transition: all .2s ease-in;
+            -moz-transition: all .2s ease-in;
+            -o-transition: all .2s ease-in;
+            transition: all .2s ease-in;
+            &:focus {
+                &::-webkit-input-placeholder {
+                    color: #ccc;
+                }
+            }
+        }
+    }
+}
+// --- 手机 + 密码 的iconfont 通用样式 start ---
+.ico {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 60px;
+    height: 100%;
+    background-color: #eee;
+    font-size: 40px;
+    color: #ccc;
+}
+// --- 手机 + 密码 输入框 start---
+.inpbox {
+    overflow: hidden;
+    position: absolute;
+    left: 60px;
+    width: 298px;
+    height: 100%;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.inpbox input {
+    width: 100%;
+    height: 33px;
+    padding: 8px 0;
+    padding-left: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.inpbox input::-webkit-input-placeholder {
+    color: #666;
+    font-size: .8rem;
+    line-height: 33px;
+    -webkit-transition: all .2s ease-in;
+    -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+}
+// ---- main start ----
+main {
+    height: 100%;
+    background-color: #eee;
+    .wrap {
+        width: 600px;
+        height: 100%;
+        margin: 0 auto;
+        padding-top: 30px;
+        .login {
+            width: 500px;
+            height: 450px;
+            margin: 0 auto;
+            background-color: #fff;
+            .l-content {
+                box-sizing: border-box;
+                width: 440px;
+                height: 400px;
+                margin: 0 auto;
+                padding-top: 50px;
+                .c-title {
+                    h2 {
+                        color: #bbb;
+                    }
+                }
+                .c-line {
+                    display: block;
+                    width: 360px;
+                    height: 2px;
+                    margin: 8px auto 0;
+                    background-color: #bbb;
+                }
+                #tip {
+                    margin: 10px auto;
+                    margin-bottom: 5px;
+                    width: 360px;
+                    height: 40px;
+                    line-height: 40px;
+                    color: #fff;
+                    transform: translateY(-20px);
+                    font-size: .9rem;
+                    font-family: 'Sans Serif';
+                    border-radius: 10px 10px 10px 10px ;
+                    background-color: rgba(94,213,209,0);
+                    -webkit-transition: all .3s ease-in;
+                    transition: all .2s ease-in;
+                }
+                .formbox {
+                    width: 360px;
+                    margin: 20px auto 0;
+                    .form-one {
+                        height: 100%;
+                        .phonebox, .pwdbox {
+                            -webkit-transition: all .2s ease-in;
+                            -moz-transition: all .2s ease-in;
+                            -o-transition: all .2s ease-in;
+                            transition: all .2s ease-in;
+                        }
+                        .pwdbox {
+                            margin-top: 20px;
+                        }
+                        .otherbox, .btnbox {
+                            margin-top: 10px;
+                        }
+                        .otherbox {
+                            border: 0;
+                            .o-left, .o-right, .o-center {
+                                position: absolute;
+                                left: 0;
+                                top: 0;
+                                height: 100%;
+                            }
+                            .o-left {
+                                input[type="checkbox"] {
+                                    // visibility: hidden;
+                                    -webkit-appearance: none;
+                                    width: 16px;
+                                    height: 16px;
+                                    box-shadow: 0 0 1px 1px #ccc;
+                                    background-image: url('../images/nochecked.png');
+                                    background-repeat: no-repeat;
+                                    background-position: -5px -5px;
+                                    vertical-align: middle;
+                                    &:checked {
+                                        background-image: url('../images/checked.png');
+                                        background-position: -10px -5px;
+                                    }
+                                }
+                                span {
+                                    cursor: default;
+                                }
+                            }
+                            .o-center {
+                                left: 220px;
+                            }
+                            .o-right {
+                                left: 298px;
+                                a {
+                                    color: red;
+                                    font-weight: 500;
+                                    text-decoration: underline;
+                                }
+                            }
+                        }
+                        .btnbox {
+                            border: 0;
+                            input[type="button"] {
+                                width: 100%;
+                                height: 100%;
+                                background-color: rgb( 224, 54, 54 );
+                                color: #fff;
+                                font-size: 1rem;
+                                letter-spacing: 5px;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+// ---- main end ----
