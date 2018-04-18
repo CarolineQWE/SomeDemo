@@ -1,0 +1,173 @@
+@charset "utf-8";
+html, body {
+    height: 100%;
+}
+body {
+    overflow: hidden;
+    text-align: center;
+}
+// --- main start ---
+main {
+    overflow: hidden;
+    height: 100%;
+    background-color: #eee;
+    .wrap {
+        width: 600px;
+        height: 100%;
+        margin: 0 auto;
+        padding-top: 15px;
+        .register {
+            width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            .r-content {
+                box-sizing: border-box;
+                width: 440px;
+                height: 540px;
+                margin: 0 auto;
+                padding-top: 20px;
+                .c-title {
+                    h2 {
+                        color: #bbb;
+                        cursor: default;
+                    }
+                }
+                .c-line {
+                    display: block;
+                    width: 360px;
+                    height: 2px;
+                    margin: 8px auto 0;
+                    background-color: #bbb;
+                }
+                .formbox {
+                    width: 360px;
+                    margin: 20px auto 0;
+                    // 提示框
+                    #tip {
+                        position: relative;
+                        height: 45px;
+                        margin: -5px auto;
+                        border-radius: 10px;
+                        line-height: 45px;
+                        color: #fff;
+                        font-size: .85rem;
+                        font-family: 'Sans serif';
+                        background-color: rgba(255,255,255,0);
+                        -webkit-transform: translateY(-33px);
+                        -moz-transform: translateY(-33px);
+                        transform:translateY(-33px);
+                        -webkit-transition: all .3s ease-in;
+                        -moz-transition: all .3s ease-in;
+                        -o-transition: all .3s ease-in;
+                        transition: all .3s ease-in;
+                        -webkit-user-select: none;
+                        -moz-user-select: none;
+                        -ms-user-select: none;
+                        -o-user-select: none;
+                        user-select: none;
+                    }
+                    #form-one {
+                        // 所有输入框外部盒子-共同样式
+                        .samebox {
+                            height: 40px;
+                            margin-top: 15px;
+                            border: 1px solid #999;
+                            // 输入框
+                            .samestyle {
+                                box-sizing: border-box;
+                                overflow: hidden;
+                                width: 100%;
+                                height: 100%;
+                                padding-left: 12px;
+                                font-size: .8rem;
+                                -webkit-transition: all .2s ease-in;
+                                -moz-transition: all .2s ease-in;
+                                -o-transition: all .2s ease-in;
+                                transition: all .2s ease-in;
+                                &::-webkit-input-placeholder {
+                                    letter-spacing: 1px;
+                                    font-size: .8rem;
+                                }
+                                &:focus {
+                                    box-shadow: 0 0 2px 1px rgb(46,104,170);
+                                    &::-webkit-input-placeholder {
+                                        color: #ddd;
+                                    }
+                                }
+                            }
+                        }
+                        .generalbox {
+                            .g-left {
+                                float: left;
+                                width: 206px;
+                                height: 100%;
+                                input#generalcode {
+                                    box-sizing: border-box;
+                                    width: 100%;
+                                    height: 100%;
+                                    padding: 0 12px;
+                                    font-size: .8rem;
+                                    -webkit-transition: all .2s ease-in;
+                                    -moz-transition: all .2s ease-in;
+                                    -o-transition: all .2s ease-in;
+                                    transition: all .2s ease-in;
+                                    &:focus {
+                                        box-shadow: 0 0 2px 1px rgb(46, 104, 170);
+                                        &::-webkit-input-placeholder {
+                                            color: #ddd;
+                                        }
+                                    }
+                                }
+                            }
+                            .g-right {
+                                float: right;
+                                width: 150px;
+                                height: 100%;
+                                input#phonecode {
+                                    width: 100%;
+                                    height: 100%;
+                                    box-sizing: border-box;
+                                    background-color: rgb(119,195,75);
+                                    color: #fff;
+                                    cursor: pointer;
+                                }
+                            }
+                        }
+                        .loginbox {
+                            height: 30px;
+                            margin: 5px auto;
+                            border: none;;
+                            line-height: 30px;
+                            span, a {
+                                float: right;
+                                font-size: .8rem;
+                            }
+                            span {
+                                margin-right: 15px;
+                            }
+                            a {
+                                margin-right: 30px;
+                                color: #f01b2d;
+                                text-decoration: underline;
+                            }
+                        }
+                        .submitbox {
+                            margin-top: 10px;
+                            input {
+                                color: #fff;
+                                background-color: rgb(240,27,45);
+                                cursor: pointer;
+                                font-size: 1rem !important;
+                                letter-spacing: 10px;
+                                &:focus {
+                                    box-shadow: none !important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+// --- main end ---

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录</title>
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/l-r-header.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <!-- 头部 start -->
+    <header>
+        <div class="content">
+            <div class="logo">
+                <a href="index.html"><img src="images/logo.png" width="502" height="482" alt=""></a>
+            </div>
+            <div class="title">
+                <h1><a href="javascript:void(0);">猿计划</a></h1>
+            </div>
+            <div class="guide">
+                <ul>
+                    <li class="item"><a href="index.html">首页</a></li>
+                    <li class="item"><a href="">知识体系</a></li>
+                    <li class="item"><a href="">话题</a></li>
+                    <li class="item"><a href="">博客</a></li>
+                    <li class="item"><a href="">题目</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    <!-- 头部 end -->
+    <!-- 主体 start -->
+    <main>
+        <div class="wrap">
+            <!-- 白色登录框 -->
+            <div class="login">
+                <!-- 主输入框 -->
+                <div class="l-content">
+                    <div class="c-title">
+                        <h2>欢迎来到猿计划</h2>
+                    </div>
+                    <span class="c-line"></span>
+                    <p id="tip">
+                    </p>
+                    <div class="formbox">
+                        <form action="index.html" method="POST" class="form-one">
+                            <!-- 手机输入 -->
+                            <div class="phonebox samebox">
+                                <div class="ico">
+                                    <i class="fa fa-user"></i>
+                                </div>
+                                <div class="inpbox phoneinp">
+                                    <input type="text" name="userphone" placeholder="请输入登录手机号" id="phone">
+                                </div>
+                            </div>
+                            <!-- 密码输入 -->
+                            <div class="pwdbox samebox">
+                                <div class="ico">
+                                    <i class="fa fa-lock"></i>
+                                </div>
+                                <div class="inpbox pwdinp">
+                                    <input type="password" name="userpwd" id="userpwd" placeholder="6-16位密码,区分大小写,不能使用空格">
+                                </div>
+                            </div>
+                            <div class="samebox otherbox">
+                                <!-- 自动登录 -->
+                                <div class="o-left">
+                                    <input type="checkbox" name="auto" id="">
+                                    <span>下次自动登录</span>
+                                </div>
+                                <div class="o-center">
+                                    <a href="javascript:void(0);">忘记密码?</a>
+                                </div>
+                                <div class="o-right">
+                                    <a href="register.html">立即注册</a>
+                                </div>
+                            </div>
+                            <div class="samebox btnbox">
+                                <input type="button" value="登录" id="submitbtn">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="js/mytool.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/login.js"></script>
+    <script>
+        
+    </script>
+</body>
+</html>
